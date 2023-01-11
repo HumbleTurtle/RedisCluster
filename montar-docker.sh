@@ -1,4 +1,5 @@
 #!/bin/bash
 
-docker cp redis.conf redis:/usr/local/etc/redis/redis.conf
-docker restart redis
+docker rm -f redis
+docker build -t RedisCluster .
+docker run -d -p 6379:6379 --name redis --restart unless-stopped RedisCluster
